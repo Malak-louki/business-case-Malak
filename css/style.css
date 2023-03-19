@@ -1,0 +1,405 @@
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Poppins:wght@300;400;700&display=swap");
+/* ******************************
+*CSS GLOBAL
+******************************** */
+body {
+  margin: 0;
+  font-family: Poppins;
+  color: #f5f4f4;
+  background-color: var(--grey);
+}
+h1,
+h2 {
+  font-family: Ibra Real Nova, serif;
+}
+:root {
+  --gold: rgb(182, 145, 85);
+  --grey: rgb(43, 39, 39);
+  --black_opacity: rgba(0, 0, 0, 0.156);
+  /* --main-btn: linear-gradiant(rgba(182, 145, 85)0.8,rgba(43, 39, 39)0.1); */
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+/* ****************************
+* CLASSES GENERALS
+********************************/
+.boxs{
+  background-color: var(--black_opacity);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+}
+.main-btn {
+  padding: 10px 20px;
+  background: linear-gradient(
+    to right,
+    rgb(182, 145, 85),
+    rgba(43, 39, 39, 0.088)
+  );
+  border-radius: 30px;
+  transition: 1s;
+  text-align: center;
+}
+
+
+/* *******************************
+*CSS PAR SECTION
+********************************** */
+/* **************************** HEADER ****************************************************************** */
+header {
+  background-color: var(--grey);
+  height: 100vh;
+}
+nav {
+  background-color: rgba(0, 0, 0, 0.156);
+  padding-left: 20px;
+}
+nav img {
+  width: 100px;
+}
+header nav #burger {
+  display: none;
+}
+header li img {
+  width: 25px;
+}
+nav h1 {
+  color: var(--gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+nav li a {
+  color: rgb(255, 255, 255);
+}
+nav li a:hover {
+  color: var(--gold);
+}
+nav li a svg {
+  width: 30px;
+}
+.animation-texte-container {
+  margin-left: 15%;
+}
+
+.anim-txt {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.anim-txt::after {
+  visibility: hidden;
+  content: "";
+  margin-left: 5px;
+  border-right: 4px solid #fff;
+}
+
+.afterActive.anim-txt::after {
+  visibility: visible;
+}
+
+/* ***************************************  effet blur du backgroud *************************** */
+header div.blur {
+  position: absolute;
+  width: 100px;
+  height: 70px;
+  background: rgba(173, 163, 117, 1);
+  filter: blur(47.5px);
+  z-index: 1;
+}
+header div.blur:nth-of-type(1) {
+  left: 5%;
+  top: 20%;
+}
+header div.blur:nth-of-type(2) {
+  position: absolute;
+  left: 25%;
+  top: 30%;
+}
+header div.blur:nth-of-type(3) {
+  position: absolute;
+  left: 48%;
+  top: 43%;
+  width: 120px;
+  height: 100px;
+}
+header div.blur:nth-of-type(4) {
+  position: absolute;
+  left: 70%;
+  bottom: 35%;
+}
+header div.blur:nth-of-type(5) {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+header div.blur:nth-of-type(6) {
+  position: absolute;
+  left: 13%;
+  bottom: 25%;
+}
+header div.blur:nth-of-type(7) {
+  position: absolute;
+  right: 7%;
+  bottom: 70%;
+}
+#flèche {
+  position: absolute;
+  height: 30px;
+  left: calc(50% - 30px);
+  bottom: 5%;
+}
+/* *************************** SECTION CARDS**************************************** */
+#carte ul li img{
+  object-fit: cover;
+  margin: 20px 5px;
+  border-radius: 10px;
+}
+.fa-ethereum, .bi-heart{
+  font-size: 24px;
+  color: var(--gold);
+}
+#carte div {
+  box-sizing: border-box;
+}
+/* *********************************** SECTION 2 DESCRIPTION ************************************* */
+#description {
+  margin-top: 90px;
+}
+
+#description article {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  padding: 10px 15px;
+}
+
+/* ******************************** SECTION 1  POPULAIRES******************* */
+.small_img {
+  width: 170px;
+  height: 290px;
+}
+.mid_img {
+  width: 180px;
+  height: 420px;
+}
+.big_img {
+  width: 280px;
+  height: 470px;
+}
+.carousel {
+  --carousel-item-height: 250px;
+  --carousel-height: 500px;
+}
+.carousel-item {
+  border: 1px solid var(--gold);
+  display: block;
+  object-fit: cover;
+  box-shadow: none;
+}
+.carousel-controls {
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#populaires a.main-btn {
+  position: absolute;
+  left: calc(50% - 60px);
+}
+
+/* ******************************** SECTION 3  TEAM  ********************************** */
+#team img {
+  width: 150px;
+  margin: 40px 0;
+}
+#team h3 {
+  font-size: 1.25rem;
+}
+#team h4 {
+  font-size: 1rem;
+}
+
+
+
+
+/* *********************************** FOOTER ******************************************* */
+footer{
+  background-color: var(--black_opacity);
+ padding-top:  20px ;
+ margin-bottom: 0;
+}
+footer i{
+  font-size: 2rem;
+}
+footer p{
+  margin-bottom: 0;
+}
+
+/* ************************************** KEYFRAMES ***************************************** */
+/* ****************************** DEBUT KEYFRAME CLASS MAIN-BTN ************************ */
+@keyframes btnOver {
+  0% {
+    background: linear-gradient(0deg, var(--gold), var(--black_opacity));
+  }
+  12.5% {
+    background: linear-gradient(
+      22.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  25% {
+    background: linear-gradient(45deg, var(--gold), var(--black_opacity));
+  }
+  37.5% {
+    background: linear-gradient(
+      67.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  50% {
+    background: linear-gradient(90deg, var(--gold), var(--black_opacity));
+  }
+  62.5% {
+    background: linear-gradient(
+      112.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  75% {
+    background: linear-gradient(135deg, var(--gold), var(--black_opacity));
+  }
+  87.5% {
+    background: linear-gradient(
+      157.5deg,
+      var(--gold),
+      rgba(43, 39, 39, 0)
+    );
+  }
+  100% {
+    background: linear-gradient(180deg, var(--gold), var(--black_opacity));
+  }
+}
+
+@keyframes btnOut {
+  0% {
+    background: linear-gradient(180deg, var(--gold), var(--black_opacity));
+  }
+  12.5% {
+    background: linear-gradient(
+      157.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  25% {
+    background: linear-gradient(135deg, var(--gold), var(--black_opacity));
+  }
+  37.5% {
+    background: linear-gradient(
+      112.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  50% {
+    background: linear-gradient(90deg, var(--gold), rgba(43, 39, 39, 0));
+  }
+  62.5% {
+    background: linear-gradient(
+      67.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  75% {
+    background: linear-gradient(45deg, var(--gold), var(--black_opacity));
+  }
+  87.5% {
+    background: linear-gradient(
+      22.5deg,
+      var(--gold),
+      var(--black_opacity)
+    );
+  }
+  100% {
+    background: linear-gradient(0deg, var(--gold), var(--black_opacity));
+  }
+}
+/* ****************************** FIN KEYFRAME CLASS MAIN-BTN *************************************************** */
+/* ***************************** RESPONSIVE MOBILE*************************************************************** */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+  /* ****************** burger menu****************************************************************************** */
+  header nav ul {
+    height: 0;
+    overflow: hidden;
+    display: block;
+    position: absolute;
+  }
+
+  header nav #burger {
+    display: block;
+    appearance: none;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  header nav #burger::before {
+    content: "\f0c9";
+  }
+  header nav #burger:checked::before {
+    content: "\f00d";
+  }
+  header nav #burger:checked + ul {
+    height: auto;
+  }
+  /* **************************************** FIN BURGER MENU***************************************************** */
+  #team h3 {
+    text-align: center;
+    white-space: none;
+  }
+  #team h3 {
+    text-align: center;
+    white-space: none;
+  }
+  #team img {
+    width: 60%;
+  }
+
+  .team-mob {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* ************************************************** RESPONSIVE TAB ********************************************* */
+@media (min-width: 768px) {
+  .anim-txt:nth-of-type(2) {
+    position: relative;
+    left: 35%;
+  }
+
+  .anim-txt:nth-of-type(3) {
+    position: relative;
+    left: 55%;
+  }
+  #text-header {
+    padding-left: 160px;
+    padding-top: 50px;
+  }
+
+  /* ********************** SECTION TEAM************************************************************************** */
+  #team img {
+    width: 60%;
+  }
+}
