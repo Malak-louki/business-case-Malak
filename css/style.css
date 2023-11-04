@@ -47,9 +47,9 @@ a {
 *CSS PAR SECTION
 ********************************** */
 /* **************************** HEADER ****************************************************************** */
-header {
+#header-section {
   background-color: var(--grey);
-  height: 100vh;
+  height: 65vh;
 }
 nav {
   background-color: rgba(0, 0, 0, 0.156);
@@ -86,6 +86,7 @@ nav li a svg {
   font-size: 2.5rem;
   margin-bottom: 20px;
   width: fit-content;
+  margin-top: 100px;
 }
 
 .anim-txt::after {
@@ -97,6 +98,9 @@ nav li a svg {
 
 .afterActive.anim-txt::after {
   visibility: visible;
+}
+#burger-menu-list span{
+  display: none;
 }
 
 /* ***************************************  effet blur du backgroud *************************** */
@@ -159,6 +163,7 @@ header div.blur:nth-of-type(7) {
 .fa-ethereum, .bi-heart{
   font-size: 24px;
   color: var(--gold);
+  font-size: 2rem;
 }
 #carte div {
   box-sizing: border-box;
@@ -361,6 +366,17 @@ footer p{
   }
   header nav #burger:checked + ul {
     height: auto;
+  }
+  #burger-menu-list{
+    position: absolute;
+    left: 90%;
+    top: 10%;
+    flex-direction: column;
+    background-color: var(--black_opacity);
+    padding: 20px 30px;
+  }
+  #burger-menu-list span{
+    display: inline-block;
   }
   /* **************************************** FIN BURGER MENU***************************************************** */
   #team h3 {
