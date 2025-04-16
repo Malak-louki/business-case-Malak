@@ -61,7 +61,7 @@ a {
 #header-section {
     background-color: var(--grey);
 }
-header {
+.landing_page_header {
     height: 100vh;
 }
 
