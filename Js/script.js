@@ -1,7 +1,6 @@
-// show controls
 
 this.carouselOptions = ["previous", "play", "next"];
-// replace images here
+
 this.carouselData = [
   {
     id: "1",
