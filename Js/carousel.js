@@ -1,51 +1,50 @@
 "use strict";
 
+// Définition de la classe Carousel
 class Carousel {
+  // Le constructeur prend un élément du DOM en argument
   constructor(el) {
+    // Élément DOM sur lequel le carrousel sera attaché
     this.el = el;
+
+    // Options du carrousel (précédent, suivant)
     this.carouselOptions = ["previous", "next"];
+
+    // Données du carrousel (images avec id et source)
     this.carouselData = [
-      {
-        id: "1",
-        src: "img/img_caroussel/gojo_car.png",
-      },
-      {
-        id: "2",
-        src: "img/img_caroussel/ichigo_car.png",
-      },
-      {
-        id: "3",
-        src: "img/img_caroussel/luffy_car.png",
-      },
-      {
-        id: "4",
-        src: "img/img_caroussel/zenitsu_car.png",
-      },
-      {
-        id: "5",
-        src: "img/img_caroussel/naruto_car.png",
-      },
+      { id: "1", src: "img/img_caroussel/gojo_car.png" },
+      { id: "2", src: "img/img_caroussel/ichigo_car.png" },
+      { id: "3", src: "img/img_caroussel/luffy_car.png" },
+      { id: "4", src: "img/img_caroussel/zenitsu_car.png" },
+      { id: "5", src: "img/img_caroussel/naruto_car.png" },
     ];
+
+    // Ordre actuel des éléments du carrousel
     this.carouselInView = [1, 2, 3, 4, 5];
+
+    // Référence à l'élément du conteneur du carrousel
     this.carouselContainer;
+
+    // État de lecture automatique du carrousel
     this.carouselPlayState;
   }
 
+  // Méthode appelée lors de l'initialisation du carrousel
   mounted() {
     this.setupCarousel();
   }
 
-  // Build carousel html
+  // Construit la structure HTML du carrousel
   setupCarousel() {
     const container = document.createElement("div");
     const controls = document.createElement("div");
 
-    // Add container for carousel items and controls
+    // Ajoute le conteneur pour les éléments du carrousel et les contrôles au DOM
     this.el.append(container, controls);
     container.className = "carousel-container";
     controls.className = "carousel-controls";
 
-    // Take dataset array and append items to container
+    // Ajoute chaque élément du carrousel au conteneur
     this.carouselData.forEach((item, index) => {
       const carouselItem = item.src
         ? document.createElement("img")
@@ -53,49 +52,47 @@ class Carousel {
 
       container.append(carouselItem);
 
-      // Add item attributes
+      // Ajoute les attributs à chaque élément du carrousel
       carouselItem.className = `carousel-item carousel-item-${index + 1}`;
       carouselItem.src = item.src;
-      // carouselItem.setAttribute("loading", "lazy");
-      // Used to keep track of carousel items, infinite items possible in carousel however min 5 items required
       carouselItem.setAttribute("data-index", `${index + 1}`);
     });
 
+    // Ajoute les boutons de contrôle au conteneur de contrôles
     this.carouselOptions.forEach((option) => {
       const btn = document.createElement("button");
       const axSpan = document.createElement("span");
 
-      // Add accessibilty spans to button
       axSpan.innerText = option;
       axSpan.className = "ax-hidden";
       btn.append(axSpan);
 
-      // Add button attributes
       btn.className = `carousel-control carousel-control-${option}`;
       btn.setAttribute("data-name", option);
 
-      // Add carousel control options
       controls.append(btn);
     });
 
-    // After rendering carousel to our DOM, setup carousel controls' event listeners
+    // Après le rendu du carrousel dans le DOM, configure les écouteurs d'événements pour les contrôles
     this.setControls([...controls.children]);
 
-    // Set container property
+    // Stocke la référence au conteneur dans une propriété de la classe
     this.carouselContainer = container;
   }
 
+  // Configure les écouteurs d'événements pour les boutons de contrôle
   setControls(controls) {
     controls.forEach((control) => {
       control.onclick = (event) => {
         event.preventDefault();
 
-        // Manage control actions, update our carousel data first then with a callback update our DOM
+        // Gère les actions des contrôles en mettant à jour les données du carrousel et le DOM
         this.controlManager(control.dataset.name);
       };
     });
   }
 
+  // Gère les différentes actions des boutons de contrôle
   controlManager(control) {
     if (control === "previous") return this.previous();
     if (control === "next") return this.next();
@@ -105,46 +102,49 @@ class Carousel {
     return;
   }
 
+  // Action pour passer à la diapositive précédente
   previous() {
-    // Update order of items in data array to be shown in carousel
+    // Met à jour l'ordre des éléments dans le tableau de données
     this.carouselData.unshift(this.carouselData.pop());
 
-    // Push the first item to the end of the array so that the previous item is front and center
+    // Ajoute le premier élément à la fin du tableau pour que l'élément précédent soit au centre
     this.carouselInView.push(this.carouselInView.shift());
 
-    // Update the css class for each carousel item in view
+    // Met à jour la classe CSS pour chaque élément du carrousel en vue
     this.carouselInView.forEach((item, index) => {
       this.carouselContainer.children[
         index
       ].className = `carousel-item carousel-item-${item}`;
     });
 
-    // Using the first 5 items in data array update content of carousel items in view
+    // Met à jour le contenu des éléments du carrousel en vue avec les cinq premiers éléments du tableau de données
     this.carouselData.slice(0, 5).forEach((data, index) => {
       document.querySelector(`.carousel-item-${index + 1}`).src = data.src;
     });
   }
 
+  // Action pour passer à la diapositive suivante
   next() {
-    // Update order of items in data array to be shown in carousel
+    // Met à jour l'ordre des éléments dans le tableau de données
     this.carouselData.push(this.carouselData.shift());
 
-    // Take the last item and add it to the beginning of the array so that the next item is front and center
+    // Prend le dernier élément et l'ajoute au début du tableau pour que l'élément suivant soit au centre
     this.carouselInView.unshift(this.carouselInView.pop());
 
-    // Update the css class for each carousel item in view
+    // Met à jour la classe CSS pour chaque élément du carrousel en vue
     this.carouselInView.forEach((item, index) => {
       this.carouselContainer.children[
         index
       ].className = `carousel-item carousel-item-${item}`;
     });
 
-    // Using the first 5 items in data array update content of carousel items in view
+    // Met à jour le contenu des éléments du carrousel en vue avec les cinq premiers éléments du tableau de données
     this.carouselData.slice(0, 5).forEach((data, index) => {
       document.querySelector(`.carousel-item-${index + 1}`).src = data.src;
     });
   }
 
+  // Action pour ajouter une nouvelle diapositive
   add() {
     const newItem = {
       id: "",
@@ -155,46 +155,47 @@ class Carousel {
       (item) => item.id == lastItem
     );
 
-    // Assign properties for new carousel item
+    // Affecte les propriétés pour la nouvelle diapositive
     Object.assign(newItem, {
       id: `${lastItem + 1}`,
       src: `http://fakeimg.pl/300/?text=${lastItem + 1}`,
     });
 
-    // Then add it to the "last" item in our carouselData
+    // Ajoute la nouvelle diapositive à la fin du tableau de données
     this.carouselData.splice(lastIndex + 1, 0, newItem);
 
-    // Shift carousel to display new item
+    // Décale le carrousel pour afficher la nouvelle diapositive
     this.next();
   }
 
+  // Action pour démarrer ou arrêter la lecture automatique
   play() {
     const playBtn = document.querySelector(".carousel-control-play");
     const startPlaying = () => this.next();
 
     if (playBtn.classList.contains("playing")) {
-      // Remove class to return to play button state/appearance
+      // Retire la classe pour revenir à l'état et à l'apparence du bouton de lecture
       playBtn.classList.remove("playing");
 
-      // Remove setInterval
+      // Arrête setInterval
       clearInterval(this.carouselPlayState);
       this.carouselPlayState = null;
     } else {
-      // Add class to change to pause button state/appearance
+      // Ajoute la classe pour passer à l'état et à l'apparence du bouton de pause
       playBtn.classList.add("playing");
 
-      // First run initial next method
+      // Exécute la méthode next une première fois
       this.next();
 
-      // Use play state prop to store interval ID and run next method on a 1.5 second interval
+      // Utilise la propriété de l'état de lecture pour stocker l'ID de l'intervalle et exécute la méthode next toutes les 1,5 secondes
       this.carouselPlayState = setInterval(startPlaying, 1500);
     }
   }
 }
 
-// Refers to the carousel root element you want to target, use specific class selectors if using multiple carousels
+// Sélectionne l'élément du DOM pour le carrousel et crée une nouvelle instance de Carousel
 const el = document.querySelector(".carousel");
-// Create a new carousel object
 const exampleCarousel = new Carousel(el);
-// Setup carousel and methods
+
+// Initialise le carrousel
 exampleCarousel.mounted();

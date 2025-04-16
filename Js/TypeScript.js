@@ -1,46 +1,45 @@
-var txtArray = [];
-let text1 = "Discover and collect unique NFT's";
-let text2 = "Buy, sell and stock";
-let text3 = "Your NFT's";
-txtArray.push(text1, text2, text3);
-var divText = document.getElementsByClassName("anim-txt");
+const txtArray = [
+  "Discover and collect unique NFT's",
+  "Buy, sell and stock",
+  "Your NFT's",
+];
 
-function typeText(num) {
-    let n = num;
-    let y = 0;
-    if (n == 0) {
-        divText[n].className += " afterActive";
-        const intervalId = setInterval(function () {
-            divText[n].innerHTML += txtArray[n][y];
-            y++;
-            if (y === txtArray[n].length) {
-                clearInterval(intervalId);
-            }
-        }, 50);
+// Sélection des éléments HTML avec la classe "anim-txt"
+const divText = document.querySelectorAll(".anim-txt");
 
-        setTimeout(typeText, 1500, n + 1);
-    } else if (n > divText.length - 1) {
-        divText[n - 1].className = divText[n - 1].className.replace(
-            " afterActive",
-            ""
-        );
-        clearTimeout;
-    } else {
-        divText[n - 1].className = divText[n - 1].className.replace(
-            " afterActive",
-            ""
-        );
-        divText[n].className = divText[n].className + " afterActive";
-        const intervalId = setInterval(function () {
-            divText[n].innerHTML += txtArray[n][y];
-            y++;
-            if (y === txtArray[n].length) {
-                clearInterval(intervalId);
-            }
-        }, 50);
+// Indice de message actuel
+let currentIndex = 0;
 
-        setTimeout(typeText, 1500, n + 1);
-    }
+// Fonction pour animer le texte
+function typeText() {
+  // Vérifie si tous les messages ont été affichés
+  if (currentIndex < txtArray.length) {
+    const element = divText[currentIndex]; // Élément HTML actuel
+    let charIndex = 0; // Indice de caractère actuel dans le message
+    const text = txtArray[currentIndex]; // Message actuel
+    element.classList.add("afterActive"); // Ajoute la classe pour l'effet visuel
+
+    // Utilisation de setInterval pour ajouter les caractères un par un
+    const intervalId = setInterval(() => {
+      element.textContent += text[charIndex]; // Ajout du caractère
+      charIndex++;
+
+      // Lorsque tous les caractères du message ont été ajoutés
+      if (charIndex === text.length) {
+        clearInterval(intervalId); // Arrête l'intervalle
+
+        // Attente de 1,5 secondes, puis passage au message suivant
+        setTimeout(() => {
+          element.classList.remove("afterActive"); // Supprime la classe pour l'effet visuel
+          currentIndex++; // Passe au message suivant
+          typeText(); // Appel récursif pour animer le message suivant
+        }, 1500);
+      }
+    }, 50); // Ajoute un caractère toutes les 50 millisecondes
+  }
 }
 
-setTimeout(typeText, 1000, 0);
+// Démarrage de l'animation avec un délai initial de 1 seconde
+setTimeout(typeText, 1000);
+
+  
