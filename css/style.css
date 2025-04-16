@@ -61,9 +61,6 @@ a {
 #header-section {
     background-color: var(--grey);
 }
-.landing_page_header {
-    height: 100vh;
-}
 
 nav {
     background-color: rgba(0, 0, 0, 0.156);
